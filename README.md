@@ -1,3 +1,3 @@
 # URLr
 
-URLr (pronounced URL-er) is a lightweight URL shortener written in Go
+URLr (pronounced URL-er) is a lightweight URL shortener server written in Go
