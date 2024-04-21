@@ -46,8 +46,8 @@ func main() {
 
 	// Parse flags
 	addFlag := flag.String("add", "", "Add a new URL")
-	//listFlag := flag.Bool("list", false, "List all URLs")
-	//removeFlag := flag.String("remove", "", "Remove a URL")
+	listFlag := flag.Bool("list", false, "List all URLs")
+	removeByShortURLFlag := flag.String("remove", "", "Remove a URL using the short URL suffix")
 	flag.Parse()
 
 	// Add a new URL, generating short code
@@ -64,6 +64,20 @@ func main() {
 
 		fmt.Println(*addFlag + " added successfully")
 		fmt.Println("Short URL: " + os.Getenv("BASE_URL") + "/" + shortURL)
+		return // exit
+	}
+
+	// List all URLs
+	if *listFlag {
+		var urls []URLrecord
+		db.Find(&urls)
+		if len(urls) == 0 {
+			fmt.Println("No URLs found")
+			return // exit
+		}
+		for _, urlItem := range urls {
+			fmt.Println(urlItem.LongURL + " -> " + os.Getenv("BASE_URL") + "/" + urlItem.ShortURL)
+		}
 		return // exit
 	}
 
