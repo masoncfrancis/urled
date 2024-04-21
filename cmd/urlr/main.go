@@ -7,11 +7,6 @@ import (
 	"net/http"
 )
 
-type ShortenedURL struct {
-	originalURL  string
-	shortURLCode string
-}
-
 func main() {
 
 	// Check for db
