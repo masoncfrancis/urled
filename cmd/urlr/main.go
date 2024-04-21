@@ -3,12 +3,15 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/glebarez/sqlite"
 	"github.com/joho/godotenv"
-	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
+	"log"
 	"math/rand"
 	"net/url"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -26,10 +29,16 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Check for sqlite db
-	db, dbErr := gorm.Open(sqlite.Open("urlr.db"), &gorm.Config{})
+	// Setup logging
+	myLogger := setupLogging()
+
+	// Connect to the database
+	db, dbErr := gorm.Open(sqlite.Open("urlr.db"), &gorm.Config{
+		Logger: myLogger,
+	})
 	if dbErr != nil {
-		panic("failed to connect database")
+		fmt.Println("Error connecting to database")
+		os.Exit(1)
 	}
 
 	// Migrate the schema
@@ -53,10 +62,41 @@ func main() {
 		shortURL := generateShortURL(db)
 		db.Create(&URLrecord{ShortURL: shortURL, LongURL: *addFlag})
 
+		fmt.Println(*addFlag + " added successfully")
 		fmt.Println("Short URL: " + os.Getenv("BASE_URL") + "/" + shortURL)
 		return // exit
 	}
 
+}
+
+func setupLogging() logger.Interface {
+	// Define the log file path
+	logFilePath := "urlrlogs/gorm.log"
+
+	// Create the directory if it doesn't exist
+	dir := filepath.Dir(logFilePath)
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		err := os.MkdirAll(dir, 0755)
+		if err != nil {
+			log.Fatalln(err)
+		}
+	}
+
+	// Open a file for logging
+	logFile, err := os.OpenFile(logFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	newLogger := logger.New(
+		log.New(logFile, "\r\n", log.LstdFlags), // io writer
+		logger.Config{
+			LogLevel: logger.Error, // Log level
+			Colorful: false,        // Disable color
+		},
+	)
+
+	return newLogger
 }
 
 func validateURL(inputURL string) bool {
@@ -76,10 +116,10 @@ func generateShortURL(db *gorm.DB) string {
 	}
 
 	// Check db if shortURL already exists, generate a new one if it does
-	var url URLrecord
-	db.Where("short_url = ?", shortURL).First(&url)
-	if url.ShortURL != "" {
-		shortURL = generateShortURL(db)
+	var short URLrecord
+	result := db.Where("short_url = ?", shortURL).First(&short)
+	if result.RowsAffected > 0 {
+		return generateShortURL(db)
 	}
 
 	return shortURL

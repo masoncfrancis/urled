@@ -25,3 +25,9 @@ go.work
 .vscode/
 
 .env
+
+# log files for executable
+/urlrlogs
+
+# sqlite database
+/urlr.db
