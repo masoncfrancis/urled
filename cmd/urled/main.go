@@ -33,7 +33,7 @@ func main() {
 	myLogger := setupLogging()
 
 	// Connect to the database
-	db, dbErr := gorm.Open(sqlite.Open("urlrfiles/urlr.db"), &gorm.Config{
+	db, dbErr := gorm.Open(sqlite.Open("urledfiles/urled.db"), &gorm.Config{
 		Logger: myLogger,
 	})
 	if dbErr != nil {
@@ -71,7 +71,7 @@ func main() {
 
 func setupLogging() logger.Interface {
 	// Define the log file path
-	logFilePath := "urlrfiles/logs/gorm.log"
+	logFilePath := "urledfiles/logs/gorm.log"
 
 	// Create the directory if it doesn't exist
 	dir := filepath.Dir(logFilePath)
