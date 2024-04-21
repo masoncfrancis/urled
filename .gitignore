@@ -27,7 +27,7 @@ go.work
 .env
 
 # log files for executable
-/urlrfiles
+/urledfiles
 
 # sqlite database
-urlr.db
+urled.db
