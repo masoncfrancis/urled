@@ -148,7 +148,10 @@ func startServer(db *gorm.DB) {
 		// Print request with long and short url info to console, as well as who requested it
 		fmt.Println("Request: " + urlRecord.LongURL + " -> " + os.Getenv("BASE_URL") + "/" + urlRecord.ShortURL + " by " + c.ClientIP())
 	})
+
+	// Start the server
 	r.Run(":4567")
+	fmt.Println("URLed server started at " + os.Getenv("BASE_URL") + ":4567")
 }
 
 func setupLogging() logger.Interface {
