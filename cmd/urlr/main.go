@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 	"net/http"
-	"os"
 )
 
 type ShortenedURL struct {
@@ -12,5 +13,7 @@ type ShortenedURL struct {
 }
 
 func main() {
+
+	// Check for db
 
 }
