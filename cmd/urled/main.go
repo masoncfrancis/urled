@@ -37,7 +37,7 @@ func main() {
 	// Define the usage function
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
-		fmt.Fprintln(os.Stderr, "This program is used to shorten URLs. It provides options to add, list, and remove URLs.")
+		fmt.Fprintln(os.Stderr, "URLed is a lightweight URL shortener server. It provides options to add, list, and remove URLs.")
 		flag.PrintDefaults()
 	}
 
@@ -126,7 +126,12 @@ func main() {
 }
 
 func startServer(db *gorm.DB) {
+	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
+
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"message": "Welcome to URLed"})
+	})
 
 	r.GET("/:shortURL", func(c *gin.Context) {
 		shortURL := c.Param("shortURL")
@@ -139,6 +144,9 @@ func startServer(db *gorm.DB) {
 		}
 
 		c.Redirect(http.StatusMovedPermanently, urlRecord.LongURL)
+
+		// Print request with long and short url info to console, as well as who requested it
+		fmt.Println("Request: " + urlRecord.LongURL + " -> " + os.Getenv("BASE_URL") + "/" + urlRecord.ShortURL + " by " + c.ClientIP())
 	})
 	r.Run(":4567")
 }
