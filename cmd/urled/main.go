@@ -48,6 +48,7 @@ func main() {
 	addFlag := flag.String("add", "", "Add a new URL")
 	listFlag := flag.Bool("list", false, "List all URLs")
 	removeByShortURLFlag := flag.String("remove", "", "Remove a URL using the short URL suffix")
+	removeByLongURLFlag := flag.String("remove-long", "", "Remove a URL using the long URL")
 	flag.Parse()
 
 	// Add a new URL, generating short code
@@ -78,6 +79,32 @@ func main() {
 		for _, urlItem := range urls {
 			fmt.Println(urlItem.LongURL + " -> " + os.Getenv("BASE_URL") + "/" + urlItem.ShortURL)
 		}
+		return // exit
+	}
+
+	// Remove a URL by short URL
+	if *removeByShortURLFlag != "" {
+		var urlRecord URLrecord
+		result := db.Where("short_url = ?", *removeByShortURLFlag).First(&urlRecord)
+		if result.RowsAffected == 0 {
+			fmt.Println("Error: Short URL not found")
+			return // exit
+		}
+		db.Delete(&urlRecord)
+		fmt.Println("URL(s) removed successfully")
+		return // exit
+	}
+
+	// Remove a URL by long URL
+	if *removeByLongURLFlag != "" {
+		fmt.Println("Note: This will remove all URLs with the same long URL")
+		var urlRecord URLrecord
+		result := db.Where("long_url = ?", *removeByLongURLFlag).Delete(&urlRecord)
+		if result.RowsAffected == 0 {
+			fmt.Println("Error: Long URL not found")
+			return // exit
+		}
+		fmt.Println("URL removed successfully")
 		return // exit
 	}
 
