@@ -3,12 +3,14 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/glebarez/sqlite"
 	"github.com/joho/godotenv"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"log"
 	"math/rand"
+	"net/http"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -32,6 +34,13 @@ func main() {
 	// Setup logging
 	myLogger := setupLogging()
 
+	// Define the usage function
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
+		fmt.Fprintln(os.Stderr, "This program is used to shorten URLs. It provides options to add, list, and remove URLs.")
+		flag.PrintDefaults()
+	}
+
 	// Connect to the database
 	db, dbErr := gorm.Open(sqlite.Open("urledfiles/urled.db"), &gorm.Config{
 		Logger: myLogger,
@@ -49,6 +58,7 @@ func main() {
 	listFlag := flag.Bool("list", false, "List all URLs")
 	removeByShortURLFlag := flag.String("remove", "", "Remove a URL using the short URL suffix")
 	removeByLongURLFlag := flag.String("remove-long", "", "Remove a URL using the long URL")
+	serverFlag := flag.Bool("server", false, "Start the server")
 	flag.Parse()
 
 	// Add a new URL, generating short code
@@ -108,6 +118,29 @@ func main() {
 		return // exit
 	}
 
+	// Start the server
+	if *serverFlag {
+		startServer(db)
+	}
+
+}
+
+func startServer(db *gorm.DB) {
+	r := gin.Default()
+
+	r.GET("/:shortURL", func(c *gin.Context) {
+		shortURL := c.Param("shortURL")
+
+		var urlRecord URLrecord
+		result := db.Where("short_url = ?", shortURL).First(&urlRecord)
+		if result.RowsAffected == 0 {
+			c.JSON(http.StatusNotFound, gin.H{"error": "URL not found"})
+			return
+		}
+
+		c.Redirect(http.StatusMovedPermanently, urlRecord.LongURL)
+	})
+	r.Run(":4567")
 }
 
 func setupLogging() logger.Interface {
