@@ -73,10 +73,15 @@ $env:GOOS="linux"
 $env:GOARCH="arm64"
 go build -o "out\urled_linux_arm64_v$Version" $ProjectDirectory
 
+set GOARM=
+
 # Build for windows/amd64
 $env:GOOS="windows"
 $env:GOARCH="amd64"
 go build -o "out\urled_windows_amd64_v$Version.exe" $ProjectDirectory
+
+set GOOS=
+set GOARCH=
 
 
 Write-Host "Builds completed."

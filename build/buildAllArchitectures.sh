@@ -52,4 +52,8 @@ env GOOS=linux GOARCH=arm64 go build -o "./out/${PROJECT_NAME}_linux_arm64_v${VE
 # Build for windows/amd64
 env GOOS=windows GOARCH=amd64 go build -o "./out/${PROJECT_NAME}_windows_amd64_v${VERSION}.exe" "$PROJECT_DIR"
 
+unset GOOS
+unset GOARCH
+unset GOARM
+
 echo "Builds completed."
