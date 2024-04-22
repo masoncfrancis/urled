@@ -56,3 +56,8 @@ Currently the project is in it's infancy, but I am planning on adding these feat
 - Add support for URL expiration
 - Add support for URL analytics
 - Install as a background service that runs on boot
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
