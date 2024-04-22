@@ -46,4 +46,13 @@ To edit URls being shortened, see the flags below.
 
 Note: You can modify URLs being served by an already running server by opening a separate terminal window and running
 the binary using these flags
- 
+
+## Future Plans
+
+Currently the project is in it's infancy, but I am planning on adding these features in the future:
+
+- Add a web interface for managing URLs
+- Add support for custom short URLs
+- Add support for URL expiration
+- Add support for URL analytics
+- Install as a background service that runs on boot
