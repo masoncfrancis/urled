@@ -73,19 +73,10 @@ $env:GOOS="linux"
 $env:GOARCH="arm64"
 go build -o "out\urled_linux_arm64_v$Version" $ProjectDirectory
 
-# Build for windows/386
-$env:GOOS="windows"
-$env:GOARCH="386"
-go build -o "out\urled_windows_386_v$Version.exe" $ProjectDirectory
-
 # Build for windows/amd64
 $env:GOOS="windows"
 $env:GOARCH="amd64"
 go build -o "out\urled_windows_amd64_v$Version.exe" $ProjectDirectory
 
-# Build for windows/arm
-$env:GOOS="windows"
-$env:GOARCH="arm"
-go build -o "out\urled_windows_arm_v$Version.exe" $ProjectDirectory
 
 Write-Host "Builds completed."

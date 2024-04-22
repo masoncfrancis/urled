@@ -16,14 +16,8 @@ if [ ! -d "$PROJECT_DIR" ]; then
     exit 1
 fi
 
-# Build for darwin/386
-env GOOS=darwin GOARCH=386 go build -o "./out/${PROJECT_NAME}_darwin_386_v${VERSION}" "$PROJECT_DIR"
-
 # Build for darwin/amd64
 env GOOS=darwin GOARCH=amd64 go build -o "./out/${PROJECT_NAME}_darwin_amd64_v${VERSION}" "$PROJECT_DIR"
-
-# Build for darwin/arm
-env GOOS=darwin GOARCH=arm go build -o "./out/${PROJECT_NAME}_darwin_arm_v${VERSION}" "$PROJECT_DIR"
 
 # Build for darwin/arm64
 env GOOS=darwin GOARCH=arm64 go build -o "./out/${PROJECT_NAME}_darwin_arm64_v${VERSION}" "$PROJECT_DIR"
@@ -55,13 +49,7 @@ env GOOS=linux GOARCH=arm GOARM=7 go build -o "./out/${PROJECT_NAME}_linux_armv7
 # Build for linux/arm64
 env GOOS=linux GOARCH=arm64 go build -o "./out/${PROJECT_NAME}_linux_arm64_v${VERSION}" "$PROJECT_DIR"
 
-# Build for windows/386
-env GOOS=windows GOARCH=386 go build -o "./out/${PROJECT_NAME}_windows_386_v${VERSION}.exe" "$PROJECT_DIR"
-
 # Build for windows/amd64
 env GOOS=windows GOARCH=amd64 go build -o "./out/${PROJECT_NAME}_windows_amd64_v${VERSION}.exe" "$PROJECT_DIR"
-
-# Build for windows/arm
-env GOOS=windows GOARCH=arm go build -o "./out/${PROJECT_NAME}_windows_arm_v${VERSION}.exe" "$PROJECT_DIR"
 
 echo "Builds completed."
