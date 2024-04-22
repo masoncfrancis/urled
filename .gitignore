@@ -31,3 +31,5 @@ go.work
 
 # sqlite database
 urled.db
+
+out/
