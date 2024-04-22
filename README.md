@@ -13,7 +13,7 @@ URLed is a lightweight URL shortener server written in Go
 
 ### Prerequisites
 
-None. Just download the binary and run it.
+Set up an env file with `BASE_URL=[your base URL]`
 
 ### Installation
 
