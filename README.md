@@ -70,9 +70,7 @@ $ ./[your URLed executable] -server
 The server will run on port `4567`. Your shortened URLs will only be available at your base URL if 
 you configure traffic at that URL to be forwarded to the server at port `4567`.
 
-To edit URls being shortened, see the flags below.
-
-#### Editing Shortened URLs
+#### Adding/Removing Shortened URLs
 
 - `-add [long url]` - Shorten a new URL
 - `-remove [short url suffix]` - Remove a URL
