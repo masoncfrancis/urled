@@ -40,7 +40,7 @@ listed above, please open an issue and I will try to add support for it.
 
 ### Installation
 
-Set up an env file in the same directory as your binary with the following contents:
+Create an env file in the same directory as where your binary will go with the following contents:
 
 ```BASE_URL=[your base URL]```
 
