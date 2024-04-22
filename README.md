@@ -16,6 +16,7 @@ URLed is an open-source lightweight URL shortener server written in Go
 URLed is available for these operating systems/architectures:
 
 - Linux (amd64)
+- Linux (386)
 - Linux (arm64)
 - Linux (armv7)
 - Linux (armv6)
