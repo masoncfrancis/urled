@@ -35,14 +35,24 @@ listed above, please open an issue and I will try to add support for it.
 
 ### Installation
 
-Download the binary for your architecture from the [releases page](https://github.com/masoncfrancis/urled/releases)
-and put it wherever you want.
-
 Set up an env file in the same directory as your binary with the following contents:
 
 ```BASE_URL=[your base URL]```
 
 Note: Make sure you include the protocol (http/https) in the base URL
+
+#### Stable
+
+Download the binary for your architecture from the [releases page](https://github.com/masoncfrancis/urled/releases)
+and put it in the same directory as your `.env` file.
+
+#### Unstable
+
+If you want to run the latest version of URLed, you can clone the repository and build the binary yourself.
+
+```bash
+go build ./cmd/urled
+```
 
 ### Usage
 
