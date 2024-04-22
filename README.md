@@ -1,6 +1,6 @@
 # URLed
 
-URLed is an open-source lightweight URL shortener server written in Go
+URLed is an open-source self-hosted lightweight URL shortener server written in Go
 
 ## Tech Stack
 
