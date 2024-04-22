@@ -150,8 +150,8 @@ func startServer(db *gorm.DB) {
 	})
 
 	// Start the server
-	r.Run(":4567")
 	fmt.Println("URLed server started at " + os.Getenv("BASE_URL") + ":4567")
+	r.Run(":4567")
 }
 
 func setupLogging() logger.Interface {
