@@ -9,7 +9,9 @@ URLed is an open-source lightweight URL shortener server written in Go
 - Gorm (ORM)
 - SQLite
 
-## Minimum Requirements
+## Getting Started
+
+### Minimum Requirements
 
 URLed is available for these operating systems/architectures:
 
@@ -30,20 +32,16 @@ The project uses <10MB of RAM when running, and the binary is <20MB in size.
 I want to make this project available to run on whatever architecture you have, so if you don't see your architecture
 listed above, please open an issue and I will try to add support for it.
 
-## Getting Started
+### Installation
 
-### Prerequisites
+Download the binary for your architecture from the [releases page](https://github.com/masoncfrancis/urled/releases)
+and put it wherever you want.
 
 Set up an env file in the same directory as your binary with the following contents:
 
 ```BASE_URL=[your base URL]```
 
 Note: Make sure you include the protocol (http/https) in the base URL
-
-### Installation
-
-Download the binary for your architecture from the [releases page](https://github.com/masoncfrancis/urled/releases)
-and put it wherever you want.
 
 ### Usage
 
