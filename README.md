@@ -17,6 +17,8 @@ Set up an env file with the following contents
 
 ```BASE_URL=[your base URL]```
 
+Note: Make sure you include the protocol (http/https) in the base URL
+
 ### Installation
 
 Download the binary for your architecture from the [releases page](https://github.com/masoncfrancis/urled/releases)
