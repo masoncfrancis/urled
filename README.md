@@ -77,8 +77,8 @@ you configure traffic at that URL to be forwarded to the server at port `4567`.
 - `-remove-long [long url]` - Remove all instances of a URL
 - `-list` - List all URLs being shortened
 
-Note: You can modify URLs being served by an already running server by opening a separate terminal window and running
-the binary using these flags
+Note: You can modify URLs being served by an already running server by opening a new terminal window and running
+the binary separately using these flags
 
 ## Future Plans
 
