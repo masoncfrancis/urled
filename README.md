@@ -29,7 +29,7 @@ URLed is available for these operating systems/architectures:
 - FreeBSD (amd64)
 - FreeBSD (386)
 - FreeBSD (armhf)
-- MacOS (x86_64)
+- MacOS (amd64)
 - MacOS (arm64)
 - Windows (amd64)
 
