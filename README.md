@@ -5,14 +5,14 @@ URLed is an open-source self-hosted lightweight URL shortener server written in 
 ## What URLed is built on
 
 - Go
-  - Gin (HTTP web framework)
-  - Gorm (ORM)
+    - Gin (HTTP web framework)
+    - Gorm (ORM)
 - SQLite
 
 ## Why did you build this?
 
-I built URLed because I was sick of all the other self-hosted URL shorteners being based on PHP and being hard to set up. I wanted
-a URL shortener I could run from a single executable and self host on super minimal hardware.
+I built URLed because I was sick of all the other self-hosted URL shorteners being based on PHP and being hard to set
+up. I wanted a URL shortener I could run from a single executable and self-host on super minimal hardware.
 
 ## Getting Started
 
@@ -51,7 +51,8 @@ Note: Make sure you include the protocol (http/https) in the base URL
 Download the binary for your architecture from the [releases page](https://github.com/masoncfrancis/urled/releases)
 and put it in the same directory as your `.env` file.
 
-If you have an issue in UNIX-style OSes with an "access denied" error when you run it, run the following command and try again:
+If you have an issue in UNIX-style OSes with an "access denied" error when you run it, run the following command and try
+again:
 
 ```bash
 chmod +x ./[your URLed executable]
@@ -73,7 +74,7 @@ To start the server, run the following command:
 $ ./[your URLed executable] -server
 ```
 
-The server will run on port `4567`. Your shortened URLs will only be available at your base URL if 
+The server will run on port `4567`. Your shortened URLs will only be available at your base URL if
 you configure traffic at that URL to be forwarded to the server at port `4567`.
 
 #### Adding/Removing Shortened URLs
