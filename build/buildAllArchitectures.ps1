@@ -18,6 +18,7 @@ if (-not (Test-Path $ProjectDirectory -PathType Container)) {
 # Store original GOOS and GOARCH values
 $originalGOOS = $env:GOOS
 $originalGOARCH = $env:GOARCH
+$originalGOARM = $env:GOARM
 
 # Build for darwin/amd64
 $env:GOOS="darwin"
@@ -87,6 +88,7 @@ go build -o "out\urled_windows_amd64_v$Version.exe" $ProjectDirectory
 # Reset GOOS and GOARCH to their original values
 $env:GOOS = $originalGOOS
 $env:GOARCH = $originalGOARCH
+$env:GOARM = $originalGOARM
 
 
 Write-Host "Builds completed."

@@ -19,6 +19,7 @@ fi
 # Store original GOOS and GOARCH values
 originalGOOS=$GOOS
 originalGOARCH=$GOARCH
+originalGOARM=$GOARM
 
 # Build for darwin/amd64
 env GOOS=darwin GOARCH=amd64 go build -o "./out/${PROJECT_NAME}_darwin_amd64_v${VERSION}" "$PROJECT_DIR"
@@ -59,5 +60,6 @@ env GOOS=windows GOARCH=amd64 go build -o "./out/${PROJECT_NAME}_windows_amd64_v
 # Reset GOOS and GOARCH to their original values
 export GOOS=$originalGOOS
 export GOARCH=$originalGOARCH
+export GOARM=$originalGOARM
 
 echo "Builds completed."
