@@ -16,6 +16,10 @@ if [ ! -d "$PROJECT_DIR" ]; then
     exit 1
 fi
 
+# Store original GOOS and GOARCH values
+originalGOOS=$GOOS
+originalGOARCH=$GOARCH
+
 # Build for darwin/amd64
 env GOOS=darwin GOARCH=amd64 go build -o "./out/${PROJECT_NAME}_darwin_amd64_v${VERSION}" "$PROJECT_DIR"
 
@@ -52,8 +56,8 @@ env GOOS=linux GOARCH=arm64 go build -o "./out/${PROJECT_NAME}_linux_arm64_v${VE
 # Build for windows/amd64
 env GOOS=windows GOARCH=amd64 go build -o "./out/${PROJECT_NAME}_windows_amd64_v${VERSION}.exe" "$PROJECT_DIR"
 
-unset GOOS
-unset GOARCH
-unset GOARM
+# Reset GOOS and GOARCH to their original values
+export GOOS=$originalGOOS
+export GOARCH=$originalGOARCH
 
 echo "Builds completed."
