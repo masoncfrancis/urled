@@ -1,13 +1,13 @@
 # URLed
 
-URLed is a lightweight URL shortener server written in Go
+URLed is an open-source lightweight URL shortener server written in Go
 
 ## Tech Stack
 
 - Go
-- SQLite
-- Gin (HTTP web framework)
+- - Gin (HTTP web framework)
 - Gorm (ORM)
+- SQLite
 
 ## Getting Started
 
