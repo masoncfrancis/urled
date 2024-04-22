@@ -51,7 +51,9 @@ the binary using these flags
 
 Currently the project is in it's infancy, but I am planning on adding these features in the future:
 
+
 - Add a web interface for managing URLs
+- Runnable in a Docker container
 - Add support for custom short URLs
 - Add support for URL expiration
 - Add support for URL analytics
