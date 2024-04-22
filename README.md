@@ -5,8 +5,8 @@ URLed is an open-source self-hosted lightweight URL shortener server written in 
 ## What URLed is built on
 
 - Go
-- Gin (HTTP web framework)
-- Gorm (ORM)
+  - Gin (HTTP web framework)
+  - Gorm (ORM)
 - SQLite
 
 ## Why did you build this?
