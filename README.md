@@ -51,7 +51,6 @@ the binary using these flags
 
 Currently the project is in it's infancy, but I am planning on adding these features in the future:
 
-
 - Add a web interface for managing URLs
 - Runnable in a Docker container
 - Add support for custom short URLs
@@ -62,4 +61,3 @@ Currently the project is in it's infancy, but I am planning on adding these feat
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
