@@ -5,9 +5,30 @@ URLed is an open-source lightweight URL shortener server written in Go
 ## Tech Stack
 
 - Go
-- - Gin (HTTP web framework)
+- Gin (HTTP web framework)
 - Gorm (ORM)
 - SQLite
+
+## Minimum Requirements
+
+URLed is available for these operating systems/architectures:
+
+- Linux (amd64)
+- Linux (arm64)
+- Linux (armv7)
+- Linux (armv6)
+- Linux (armv5)
+- FreeBSD (amd64)
+- FreeBSD (386)
+- FreeBSD (armhf)
+- MacOS (x86_64)
+- MacOS (arm64)
+- Windows (arm64)
+
+The project uses <10MB of RAM when running, and the binary is <20MB in size.
+
+I want to make this project available to run on whatever architecture you have, so if you don't see your architecture
+listed above, please open an issue and I will try to add support for it.
 
 ## Getting Started
 
