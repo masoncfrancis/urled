@@ -22,10 +22,10 @@ and put it wherever you want.
 
 ### Usage
 
-To start the server, run the following command, replacing `urled` with whatever you named the binary:
+To start the server, run the following command:
 
 ```bash
-$ ./urled -server
+$ ./[your URLed executable] -server
 ```
 
 To edit URls being shortened, see the flags below.
