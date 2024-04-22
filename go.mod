@@ -1,4 +1,4 @@
-module github.com/masoncfrancis/urlr
+module github.com/masoncfrancis/urled
 
 go 1.22.1
 
