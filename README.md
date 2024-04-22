@@ -27,7 +27,7 @@ URLed is available for these operating systems/architectures:
 - MacOS (arm64)
 - Windows (arm64)
 
-The project uses <10MB of RAM when running, and the binary is <20MB in size.
+URLed uses <10MB of RAM when running (in my testing), and the binary is <20MB in size.
 
 I want to make this project available to run on whatever architecture you have, so if you don't see your architecture
 listed above, please open an issue and I will try to add support for it.
