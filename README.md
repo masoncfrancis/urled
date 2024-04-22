@@ -51,6 +51,12 @@ Note: Make sure you include the protocol (http/https) in the base URL
 Download the binary for your architecture from the [releases page](https://github.com/masoncfrancis/urled/releases)
 and put it in the same directory as your `.env` file.
 
+If you have an issue on linux with an "access denied" error, run the following command and try again:
+
+```bash
+chmod +x ./[your URLed executable]
+```
+
 #### Unstable
 
 If you want to run the latest version of URLed, you can clone the repository and build the binary yourself.
