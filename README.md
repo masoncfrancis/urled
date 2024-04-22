@@ -2,6 +2,11 @@
 
 URLed is an open-source self-hosted lightweight URL shortener server written in Go
 
+## Why?
+
+I built URLed because I was sick of all the other URL shorteners being based on PHP and hard to set up. I wanted
+a URL shortener I could run from a single executable and self host on super minimal hardware.
+
 ## Tech Stack
 
 - Go
@@ -30,7 +35,7 @@ URLed is available for these operating systems/architectures:
 
 URLed uses <10MB of RAM when running (in my testing), and the binary is <20MB in size.
 
-I want to make this project available to run on whatever architecture you have, so if you don't see your architecture
+I want to make this project available to run on whatever hardware you have, so if you don't see your architecture
 listed above, please open an issue and I will try to add support for it.
 
 ### Installation
