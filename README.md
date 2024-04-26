@@ -13,7 +13,7 @@ URLed is an open-source self-hosted lightweight URL shortener server written in 
 
 I built URLed because I was sick of so many other self-hosted URL shorteners being based on PHP and being hard to set
 up. Even those that had Docker images available didn't seem to offer one compatible with Raspberry Pi 2 and Zero, which use ARMv6. I wanted a URL shortener 
-I could run from a single executable and self-host on super minimal hardware.
+I could run without much setup and self-host on super minimal hardware.
 
 ## Getting Started
 
