@@ -83,6 +83,17 @@ $env:GOOS="windows"
 $env:GOARCH="amd64"
 go build -o "out\urled_windows_amd64_v$Version.exe" $ProjectDirectory
 
+# Build for windows/386
+$env:GOOS="windows"
+$env:GOARCH="386"
+go build -o "out\urled_windows_386_v$Version.exe" $ProjectDirectory
+
+
+# Build for windows/arm64
+$env:GOOS="windows"
+$env:GOARCH="arm64"
+go build -o "out\urled_windows_arm64_v$Version.exe" $ProjectDirectory
+
 # Reset GOOS and GOARCH to their original values
 $env:GOOS = $originalGOOS
 $env:GOARCH = $originalGOARCH
