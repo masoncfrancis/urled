@@ -34,6 +34,7 @@ URLed is available for these operating systems/architectures:
 - MacOS (arm64)
 - Windows (amd64)
 - Windows (386)
+- Windows (arm64)
 
 URLed uses ~<20MB of RAM when running (in my testing), and the binary is <20MB in size.
 
