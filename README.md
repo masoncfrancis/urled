@@ -21,15 +21,16 @@ I could run without much setup and self-host on super minimal hardware.
 
 URLed is available for these operating systems/architectures:
 
-- Linux (amd64)
 - Linux (386)
+- Linux (amd64)
 - Linux (arm64)
 - Linux (armv7)
 - Linux (armv6)
 - Linux (armv5)
-- FreeBSD (amd64)
 - FreeBSD (386)
+- FreeBSD (amd64)
 - FreeBSD (armhf)
+- FreeBSD (arm64)
 - MacOS (amd64)
 - MacOS (arm64)
 - Windows (386)
@@ -100,6 +101,7 @@ Currently the project is in it's infancy, but I am planning on adding these feat
 - Add support for URL expiration
 - Add support for URL analytics
 - Install as a background service that runs on boot
+- Automatic updates
 
 ## License
 
