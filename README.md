@@ -11,7 +11,7 @@ URLed is an open-source self-hosted lightweight URL shortener server written in 
 
 ## Why did I build this?
 
-I built URLed because I was sick of all the other self-hosted URL shorteners being based on PHP and being hard to set
+I built URLed because I was sick of so many other self-hosted URL shorteners being based on PHP and being hard to set
 up. I wanted a URL shortener I could run from a single executable and self-host on super minimal hardware.
 
 ## Getting Started
