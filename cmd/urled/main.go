@@ -150,7 +150,8 @@ func startServer(db *gorm.DB) {
 	})
 
 	// Start the server
-	fmt.Println("URLed server started at " + os.Getenv("BASE_URL"))
+	fmt.Println("URLed server started on port 4567")
+	fmt.Println("The base URL is configured as:  " + os.Getenv("BASE_URL"))
 	r.Run(":4567")
 }
 
