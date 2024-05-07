@@ -55,8 +55,8 @@ Note: Make sure you include the protocol (http/https) in the base URL
 Download the binary for your architecture from the [releases page](https://github.com/masoncfrancis/urled/releases)
 and put it in the same directory as your `.env` file.
 
-If you have an issue in UNIX-style OSes with an "access denied" error when you run it, run the following command and try
-again:
+If you have an issue in UNIX-style OSes with an "access denied" error when you run it, run the following command to add execution permission
+and then try again:
 
 ```bash
 chmod +x ./[your URLed executable]
