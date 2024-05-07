@@ -8,6 +8,7 @@ import (
 	"github.com/joho/godotenv"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
+	"html/template"
 	"log"
 	"math/rand"
 	"net/http"
@@ -147,6 +148,31 @@ func startServer(db *gorm.DB) {
 
 		// Print request with long and short url info to console, as well as who requested it
 		fmt.Println("Request: " + urlRecord.LongURL + " -> " + os.Getenv("BASE_URL") + "/" + urlRecord.ShortURL + " by " + c.ClientIP())
+	})
+
+	r.GET("/template", func(c *gin.Context) {
+		// Define struct to hold template values
+		var templateValues struct {
+			Title string
+			Body  string
+		}
+		templateValues.Title = "URLed"
+		templateValues.Body = "Welcome to URLed, homie"
+
+		// Parse the template file
+		tmpl, err := template.ParseFiles("include/template.html")
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error parsing template file"})
+			return
+		}
+
+		// Execute the template
+		err = tmpl.Execute(c.Writer, templateValues)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error executing template"})
+			return
+		}
+
 	})
 
 	// Start the server
