@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/glebarez/sqlite"
+	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -120,7 +121,7 @@ func main() {
 
 	// Start the server
 	if *serverFlag {
-		startServer(db)
+		startServerFiber(db)
 	}
 
 }
@@ -153,6 +154,31 @@ func startServer(db *gorm.DB) {
 	fmt.Println("URLed server started on port 4567")
 	fmt.Println("The base URL is configured as:  " + os.Getenv("BASE_URL"))
 	r.Run(":4567")
+}
+
+func startServerFiber(db *gorm.DB) {
+	app := fiber.New()
+
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.JSON(fiber.Map{"message": "Welcome to URLed"})
+	})
+
+	app.Get("/:shortURL", func(c *fiber.Ctx) error {
+		shortURL := c.Params("shortURL")
+
+		var urlRecord URLrecord
+		result := db.Where("short_url = ?", shortURL).First(&urlRecord)
+		if result.RowsAffected == 0 {
+			return c.Status(http.StatusNotFound).JSON(fiber.Map{"error": "URL not found"})
+		}
+
+		return c.Redirect(urlRecord.LongURL, http.StatusMovedPermanently)
+	})
+
+	// Start the server
+	fmt.Println("The base URL is configured as:  " + os.Getenv("BASE_URL"))
+	app.Listen(":4567")
+
 }
 
 func setupLogging() logger.Interface {
