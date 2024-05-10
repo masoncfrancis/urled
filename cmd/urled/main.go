@@ -133,7 +133,10 @@ func startServer(db *gorm.DB) {
 	})
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.JSON(fiber.Map{"message": "Welcome to URLed"})
+
+		fmt.Println(time.Now().Format("2006-01-02 15:04:05") + " " + "/" + " by " + c.IP())
+
+		return c.JSON(fiber.Map{"message": "URLed is running"})
 	})
 
 	app.Get("/:shortURL", func(c *fiber.Ctx) error {
