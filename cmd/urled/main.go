@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"github.com/glebarez/sqlite"
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
@@ -121,43 +120,16 @@ func main() {
 
 	// Start the server
 	if *serverFlag {
-		startServerFiber(db)
+		startServer(db)
 	}
 
 }
 
 func startServer(db *gorm.DB) {
-	gin.SetMode(gin.ReleaseMode)
-	r := gin.Default()
-
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "Welcome to URLed"})
+	app := fiber.New(fiber.Config{
+		AppName:               "URLed",
+		DisableStartupMessage: true,
 	})
-
-	r.GET("/:shortURL", func(c *gin.Context) {
-		shortURL := c.Param("shortURL")
-
-		var urlRecord URLrecord
-		result := db.Where("short_url = ?", shortURL).First(&urlRecord)
-		if result.RowsAffected == 0 {
-			c.JSON(http.StatusNotFound, gin.H{"error": "URL not found"})
-			return
-		}
-
-		c.Redirect(http.StatusMovedPermanently, urlRecord.LongURL)
-
-		// Print request with long and short url info to console, as well as who requested it
-		fmt.Println("Request: " + urlRecord.LongURL + " -> " + os.Getenv("BASE_URL") + "/" + urlRecord.ShortURL + " by " + c.ClientIP())
-	})
-
-	// Start the server
-	fmt.Println("URLed server started on port 4567")
-	fmt.Println("The base URL is configured as:  " + os.Getenv("BASE_URL"))
-	r.Run(":4567")
-}
-
-func startServerFiber(db *gorm.DB) {
-	app := fiber.New()
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{"message": "Welcome to URLed"})
@@ -176,6 +148,7 @@ func startServerFiber(db *gorm.DB) {
 	})
 
 	// Start the server
+	fmt.Println("URLed server started on port 4567")
 	fmt.Println("The base URL is configured as:  " + os.Getenv("BASE_URL"))
 	app.Listen(":4567")
 
