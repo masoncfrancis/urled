@@ -15,6 +15,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 type URLrecord struct {
@@ -144,8 +145,8 @@ func startServer(db *gorm.DB) {
 			return c.Status(http.StatusNotFound).JSON(fiber.Map{"error": "URL not found"})
 		}
 
-		//fmt.Println("Request: " + urlRecord.LongURL + " -> " + os.Getenv("BASE_URL") + "/" + urlRecord.ShortURL + " by " + c.IP())
-		// TODO implement printing out requests to console
+		// Print the time
+		fmt.Println(time.Now().Format("2006-01-02 15:04:05") + " " + urlRecord.LongURL + " -> " + os.Getenv("BASE_URL") + "/" + urlRecord.ShortURL + " by " + c.IP())
 
 		return c.Redirect(urlRecord.LongURL, http.StatusMovedPermanently)
 	})
