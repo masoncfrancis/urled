@@ -144,6 +144,9 @@ func startServer(db *gorm.DB) {
 			return c.Status(http.StatusNotFound).JSON(fiber.Map{"error": "URL not found"})
 		}
 
+		//fmt.Println("Request: " + urlRecord.LongURL + " -> " + os.Getenv("BASE_URL") + "/" + urlRecord.ShortURL + " by " + c.IP())
+		// TODO implement printing out requests to console
+
 		return c.Redirect(urlRecord.LongURL, http.StatusMovedPermanently)
 	})
 
