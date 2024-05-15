@@ -33,7 +33,6 @@ URLed is available for these operating systems/architectures:
 - FreeBSD (arm64)
 - MacOS (amd64)
 - MacOS (arm64)
-- ~Windows (386)~ (See issue #1)
 - Windows (amd64)
 - Windows (arm64)
 
