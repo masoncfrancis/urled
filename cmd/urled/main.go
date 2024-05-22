@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/glebarez/sqlite"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/monitor"
 	"github.com/joho/godotenv"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -132,6 +133,7 @@ func startServer(db *gorm.DB) {
 		DisableStartupMessage: true,
 	})
 
+	// Root route
 	app.Get("/", func(c *fiber.Ctx) error {
 
 		fmt.Println(time.Now().Format("2006-01-02 15:04:05") + " " + "/" + " by " + c.IP())
@@ -139,6 +141,10 @@ func startServer(db *gorm.DB) {
 		return c.JSON(fiber.Map{"message": "URLed is running"})
 	})
 
+	// Monitor route
+	app.Get("/metrics", monitor.New(monitor.Config{Title: "URLed Metrics"}))
+
+	// Add a new URL
 	app.Get("/:shortURL", func(c *fiber.Ctx) error {
 		shortURL := c.Params("shortURL")
 
