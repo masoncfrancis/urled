@@ -84,7 +84,7 @@ you configure traffic at that URL to be forwarded to the server at port `4567`.
 
 - `-add [long url]` - Shorten a new URL
 - `-remove [short url suffix]` - Remove a URL
-- `-remove-long [long url]` - Remove all instances of a URL
+- `-remove-dest [destination url]` - Remove all instances of a URL by destination
 - `-list` - List all URLs being shortened
 
 Note: You can modify URLs being served by an already running server by opening a new terminal window and running
