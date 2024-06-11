@@ -37,7 +37,7 @@ func main() {
 
 	// Define the usage function
 	flag.Usage = func() {
-		fmt.Fprintln(os.Stderr, "URLed is a lightweight URL shortener server. It provides options to add, list, and remove URLs.\n")
+		fmt.Fprintln(os.Stderr, "URLed is a lightweight URL shortener server. It provides options to add, list, and remove URLs.")
 		fmt.Println("Usage of URLed:")
 		flag.PrintDefaults()
 	}
@@ -145,6 +145,60 @@ func startServer(db *gorm.DB) {
 		return c.JSON(fiber.Map{"message": "URLed is running"})
 	})
 
+	// API calls
+
+	// Add a new URL
+	app.Post("/api/add", func(c *fiber.Ctx) error {
+		var record URLrecord
+		if err := c.BodyParser(&record); err != nil {
+			return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "Cannot parse JSON"})
+		}
+		if !validateURL(record.LongURL) {
+			return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "Invalid URL"})
+		}
+		record.LongURL = strings.TrimSuffix(record.LongURL, "/")
+		record.ShortURL = generateShortURL(db)
+		db.Create(&record)
+		return c.JSON(fiber.Map{"message": "URL added successfully", "shortURL": os.Getenv("BASE_URL") + "/" + record.ShortURL})
+	})
+
+	// List all URLs
+	app.Get("/api/list", func(c *fiber.Ctx) error {
+		var urls []URLrecord
+		db.Find(&urls)
+		if len(urls) == 0 {
+			return c.JSON(fiber.Map{"message": "No URLs found"})
+		}
+		return c.JSON(urls)
+	})
+
+	// Remove a URL by short URL
+	app.Delete("/api/remove/short/:shortURL", func(c *fiber.Ctx) error {
+		var urlRecord URLrecord
+		result := db.Where("short_url = ?", c.Params("shortURL")).First(&urlRecord)
+		if result.RowsAffected == 0 {
+			return c.Status(http.StatusNotFound).JSON(fiber.Map{"error": "Short URL not found"})
+		}
+		db.Delete(&urlRecord)
+		return c.JSON(fiber.Map{"message": "URL removed successfully"})
+	})
+
+	// Remove a URL by destination URL
+	app.Delete("/api/remove/dest", func(c *fiber.Ctx) error {
+		var record URLrecord
+		if err := c.BodyParser(&record); err != nil {
+			return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "Cannot parse JSON"})
+		}
+		result := db.Where("long_url = ?", record.LongURL).Delete(&URLrecord{})
+		if result.RowsAffected == 0 {
+			return c.Status(http.StatusNotFound).JSON(fiber.Map{"error": "Long URL not found"})
+		}
+		return c.JSON(fiber.Map{"message": "URL removed successfully"})
+	})
+
+
+	// Main operation
+	// Redirect to the long URL
 	app.Get("/:shortURL", func(c *fiber.Ctx) error {
 		shortURL := c.Params("shortURL")
 
