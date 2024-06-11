@@ -37,8 +37,8 @@ func main() {
 
 	// Define the usage function
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
-		fmt.Fprintln(os.Stderr, "URLed is a lightweight URL shortener server. It provides options to add, list, and remove URLs.")
+		fmt.Fprintln(os.Stderr, "URLed is a lightweight URL shortener server. It provides options to add, list, and remove URLs.\n")
+		fmt.Println("Usage of URLed:")
 		flag.PrintDefaults()
 	}
 
@@ -58,9 +58,15 @@ func main() {
 	addFlag := flag.String("add", "", "Add a new URL")
 	listFlag := flag.Bool("list", false, "List all URLs")
 	removeByShortURLFlag := flag.String("remove", "", "Remove a URL using the short URL suffix")
-	removeByLongURLFlag := flag.String("remove-long", "", "Remove a URL using the long URL")
+	removeByLongURLFlag := flag.String("remove-dest", "", "Remove a URL using the destination URL")
 	serverFlag := flag.Bool("server", false, "Start the server")
 	flag.Parse()
+
+	// If no flags are provided, print the usage
+	if flag.NFlag() == 0 {
+		flag.Usage()
+		return // exit
+	}
 
 	// Add a new URL, generating short code
 	if *addFlag != "" {
